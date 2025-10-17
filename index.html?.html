@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>50 razones por las que me enamoré de ti 💖</title>
+<style>
+  :root{
+    --bg1: #ffd1dc;
+    --bg2: #ffb6c1;
+    --text: #3a2b2b;
+    --btn: #ff5d8f;
+  }
+  html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+  body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: linear-gradient(180deg,var(--bg1),var(--bg2));
+    color:var(--text);
+  }
+  .card{
+    width:92vw;
+    max-width:760px;
+    background: rgba(255,255,255,0.65);
+    border-radius:18px;
+    padding:22px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    position:relative;
+    overflow:visible;
+  }
+  h1{margin:0;font-size:20px;text-align:center}
+  .intro{margin-top:12px;font-size:15px;line-height:1.4;text-align:center;color:#3b2a2a}
+  .center{display:flex;align-items:center;justify-content:center;margin-top:14px;gap:10px}
+  button{border:0;background:var(--btn);color:white;padding:10px 16px;border-radius:12px;font-weight:600;cursor:pointer}
+  button.secondary{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--text)}
+  #contenidoMensaje{margin-top:6px}
+  .reasonBox{margin-top:18px;min-height:86px;display:flex;align-items:center;justify-content:center;flex-direction:column}
+  #razonTexto{font-size:18px;line-height:1.4;color:#2b1f1f;padding:0 8px;text-align:center;min-height:56px}
+  #floresContainer{position:absolute;left:0;right:0;top:-10px;bottom:0;pointer-events:none;overflow:visible}
+  .flor{position:absolute;font-size:26px;will-change:transform,top;opacity:0.95}
+  .meta{margin-top:12px;font-size:13px;color:#4b3a3a;text-align:center}
+  footer{margin-top:14px;font-size:13px;color:#4b3a3a;text-align:center}
+  .small{font-size:12px;color:#6b5252;margin-top:8px}
+  @media (min-width:800px){ h1{font-size:22px} #razonTexto{font-size:20px} }
+</style>
+</head>
+<body>
+  <div class="card" role="main" aria-labelledby="pageTitle">
+    <h1 id="pageTitle">50 razones por las que me enamoré de ti 💖</h1>
+
+    <div id="contenidoMensaje" style="">
+      <p class="intro" id="introText">Hola, sabes, fue un gran año y lo disfruté mucho, pero más disfruté todo lo que pasé contigo. Te escribo esto para que sepas lo mucho que me gustas. Tal vez no nos veamos hasta el próximo año, pero quiero dejarte esto: 50 razones por las que me enamoré de ti… y aún hay muchas más.</p>
+    </div>
+
+    <div class="center">
+      <button id="openBtn">Abrir carta 💌</button>
+      <button id="restartBtn" class="secondary" style="display:none">Reiniciar ✨</button>
+      <button id="shareBtn" class="secondary" style="display:none">Compartir</button>
+    </div>
+
+    <div class="reasonBox" id="razonesSection" style="display:none">
+      <div id="floresContainer" aria-hidden="true"></div>
+      <div id="razonTexto" aria-live="polite"></div>
+      <div class="center" style="margin-top:12px">
+        <button id="nextBtn">Siguiente razón 🌸</button>
+      </div>
+      <div class="meta small">Hecho por Axel</div>
+    </div>
+
+    <footer class="small">Puedes grabar la pantalla para mostrar la animación o compartir el archivo HTML.</footer>
+  </div>
+
+<script>
+const razones = [
+  "Tu sonrisa ilumina mis días.",
+  "Me encanta cómo te ríes de las cosas pequeñas.",
+  "Tu manera de escuchar me hace sentir comprendido.",
+  "Adoro tu sentido del humor.",
+  "Siempre sabes cómo animarme.",
+  "Me encanta la manera en que te expresas.",
+  "Tu energía es inspiradora.",
+  "Adoro cómo te preocupas por los demás.",
+  "Cada detalle que haces me hace sonreír.",
+  "Tu creatividad es increíble.",
+  "Me encanta compartir momentos contigo.",
+  "Tu risa es mi sonido favorito.",
+  "Siempre sabes cómo sorprenderme.",
+  "Adoro tu forma de ser auténtica.",
+  "Me haces sentir cómodo y comprendido.",
+  "Tu amistad significa mucho para mí.",
+  "Cada conversación contigo es valiosa.",
+  "Me encanta cómo ves la vida de forma positiva.",
+  "Tus opiniones me hacen pensar y reflexionar.",
+  "Adoro tu curiosidad y pasión por aprender.",
+  "Tu forma de escuchar me hace sentir importante.",
+  "Siempre sabes cómo hacerme reír.",
+  "Me inspiras a ser mejor cada día.",
+  "Tus pequeños gestos son muy especiales.",
+  "Me encanta la forma en que me motivas.",
+  "Tu entusiasmo es contagioso.",
+  "Me encanta cómo recuerdas detalles sobre mí.",
+  "Adoro tu forma de animar a los demás.",
+  "Cada vez que hablas, iluminas la habitación.",
+  "Me encanta tu confianza y seguridad.",
+  "Tu ternura es única y especial.",
+  "Adoro cómo te emocionas con cosas simples.",
+  "Siempre tienes palabras amables para dar.",
+  "Me encanta tu actitud positiva.",
+  "Tus consejos siempre me ayudan.",
+  "Me haces sentir especial aunque sea un pequeño gesto.",
+  "Adoro cómo compartes tus historias.",
+  "Me encanta cómo disfrutas de la vida.",
+  "Tu simpatía es única.",
+  "Siempre tienes una sonrisa para todos.",
+  "Me encanta tu paciencia y comprensión.",
+  "Adoro tu pasión por lo que haces.",
+  "Siempre sabes cómo animarme cuando estoy triste.",
+  "Tu forma de ser me inspira.",
+  "Adoro cómo expresas tus emociones.",
+  "Me encanta tu forma de hacer sentir importante a la gente.",
+  "Tus bromas siempre me hacen reír.",
+  "Adoro cómo valoras los pequeños momentos.",
+  "Me encanta tu espontaneidad.",
+  "Siempre sabes cómo alegrar un día gris.",
+  "Adoro cómo me haces sentir bien con tu compañía.",
+  "Me encanta cómo conectamos incluso en silencio.",
+  "Me hace ilusión pensar que algún día podríamos ser novios, pero sin presión."
+];
+
+let index = 0;
+const openBtn = document.getElementById('openBtn');
+const restartBtn = document.getElementById('restartBtn');
+const shareBtn = document.getElementById('shareBtn');
+const razonesSection = document.getElementById('razonesSection');
+const razonTexto = document.getElementById('razonTexto');
+const floresContainer = document.getElementById('floresContainer');
+const nextBtn = document.getElementById('nextBtn');
+const introText = document.getElementById('introText');
+const pageTitle = document.getElementById('pageTitle');
+
+function typeText(el, text, speed=40, cb){
+  el.textContent = '';
+  const chars = Array.from(text);
+  let i=0;
+  function step(){ if(i<chars.length){ el.textContent += chars[i++]; setTimeout(step, speed); } else if(cb) cb(); }
+  step();
+}
+
+let flowerInterval=null;
+function startFlowers(){ stopFlowers(); flowerInterval = setInterval(()=>{ createFlower(); }, 220); }
+function stopFlowers(){ if(flowerInterval){ clearInterval(flowerInterval); flowerInterval=null; } }
+
+function createFlower(){
+  const emojis = ['🌸','🌹','💮','🌷','💐'];
+  const f = document.createElement('div');
+  f.className='flor';
+  f.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+  const size = 18 + Math.random()*28;
+  f.style.fontSize = size + 'px';
+  f.style.left = Math.random()*90 + '%';
+  f.style.top = '-40px';
+  floresContainer.appendChild(f);
+  let top = -40;
+  let vy = 2 + Math.random()*3;
+  let gravity = 0.12 + Math.random()*0.06;
+  let bounce = 0;
+  const id = setInterval(()=>{
+    vy += gravity;
+    top += vy;
+    f.style.top = top + 'px';
+    f.style.transform = 'rotate(' + (top*2) + 'deg)';
+    if(top >= (floresContainer.clientHeight - 30) && bounce < 1){
+      vy = -vy * 0.45;
+      bounce++;
+    }
+    if(top > floresContainer.clientHeight + 60){
+      clearInterval(id);
+      f.remove();
+    }
+  }, 20);
+}
+
+function showReason(i){
+  razonesSection.style.display = 'block';
+  typeText(razonTexto, razones[i], 40);
+  startFlowers();
+  setTimeout(()=>{ stopFlowers(); }, 4000 + Math.random()*3000);
+}
+
+openBtn.addEventListener('click', ()=>{
+  openBtn.style.display='none';
+  restartBtn.style.display='inline-block';
+  shareBtn.style.display='inline-block';
+  typeText(pageTitle, '50 razones por las que me enamoré de ti 💖', 40);
+  typeText(introText, 'Hola, sabes, fue un gran año y lo disfruté mucho, pero más disfruté todo lo que pasé contigo. Te escribo esto para que sepas lo mucho que me gustas. Tal vez no nos veamos hasta el próximo año, pero quiero dejarte esto: 50 razones por las que me enamoré de ti… y aún hay muchas más.', 30, ()=>{ setTimeout(()=>{ showReason(index); }, 600); });
+});
+
+nextBtn.addEventListener('click', ()=>{
+  index++;
+  if(index >= razones.length){ index = 0; typeText(razonTexto, 'Has visto todas las razones. Gracias 💞', 30); }
+  else { showReason(index); }
+});
+
+restartBtn.addEventListener('click', ()=>{
+  index = 0;
+  razonTexto.textContent='';
+  introText.textContent = 'Hola, sabes, fue un gran año y lo disfruté mucho, pero más disfruté todo lo que pasé contigo. Te escribo esto para que sepas lo mucho que me gustas. Tal vez no nos veamos hasta el próximo año, pero quiero dejarte esto: 50 razones por las que me enamoré de ti… y aún hay muchas más.';
+  razonesSection.style.display='none';
+  stopFlowers();
+  openBtn.style.display='inline-block';
+  restartBtn.style.display='none';
+  shareBtn.style.display='none';
+});
+
+shareBtn.addEventListener('click', async ()=>{
+  const shareData = { title: document.title, text: 'Quiero compartirte estas 50 razones', url: location.href };
+  if(navigator.share){ try{ await navigator.share(shareData); return; }catch(e){} }
+  try{ await navigator.clipboard.writeText('Te comparto estas 50 razones. Abre el archivo que te envié.'); alert('Texto copiado al portapapeles. Pégalo donde quieras.'); }
+  catch(e){ alert('No se pudo compartir automáticamente. Puedes descargar el archivo HTML y enviarlo.'); }
+});
+</script>
+</body>
+</html>
